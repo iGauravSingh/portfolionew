@@ -2,6 +2,8 @@
 import Image from 'next/image'
 import { motion } from "framer-motion"
 
+import { projectData } from './Data'
+import { useState } from 'react'
 
 const projectCardVariant = {
     hidden: {
@@ -21,12 +23,20 @@ const projectCardVariant = {
 }
 
 
-const ProjectCrad = ({clickCategory,projectData}) => {
+const ProjectCrad = () => {
 
+    const [clickCategory,setClickCategory] = useState('frontend')
     const newData = projectData.filter(item=> item.type === clickCategory)
 
   return (
     <div>
+        <div className='w-full h-[3rem]'>
+        {/* tabs  */}
+        <div className='flex justify-center items-center h-full w-full text-lg font-bold tracking-widest text-slate-950'>
+          <button className={`w-[50%] h-full border-r-2 border-slate-500 ${clickCategory === 'frontend' ? 'bg-slate-300' : 'bg-slate-50'}`} onClick={()=> setClickCategory('frontend')}>Frontend</button>
+          <button className={`w-[50%] h-full ${clickCategory === 'fullstack' ? 'bg-slate-300' : 'bg-slate-50'}`} onClick={()=> setClickCategory('fullstack')}>Fullstack</button>
+        </div>
+      </div>
         <div className='px-8 flex flex-col items-center text-slate-950'>
             <h2 className='text-4xl mt-8 font-bold tracking-wide'>Projects</h2>
             {newData.map(data=> (
